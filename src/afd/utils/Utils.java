@@ -54,8 +54,8 @@ public class Utils {
         return fileReader;
     }
 
-    public ArrayList<String> leerArchivo() {
-        BufferedReader br = new BufferedReader(fileReader);
+    public ArrayList<String> leerArchivo(FileReader fr) {
+        BufferedReader br = new BufferedReader(fr);
         String datos = null;
         try {
             datos = br.readLine();
@@ -64,7 +64,7 @@ public class Utils {
                 datos = br.readLine();
 
             }
-            fileReader.close();
+            fr.close();
             br.close();
         } catch (IOException e) {
             //e.printStackTrace();

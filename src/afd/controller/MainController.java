@@ -45,7 +45,11 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                openFile();
+                try{
+                    openFile();
+                }catch(NullPointerException nullP){
+                    System.err.println("Error: "+nullP.getMessage());
+                }
 
             }
         });
@@ -62,7 +66,7 @@ public class MainController {
         mainView.btnEvaluate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+               
                 readFile();
                 String value = mainView.textWord.getText();
 
@@ -104,18 +108,20 @@ public class MainController {
     }
 
     public void openFile() {
+        utils = new Utils();
         fileReader = utils.obtenerRutaArchivo(mainView);
         readFile();
     }
 
     public void readFile() {
-        data = utils.leerArchivo();
+        
+        data = utils.leerArchivo(fileReader);
 
         int sec[][] = utils.convertStringToSec(data.get(0), data.get(1));
         int statusFinals[] = utils.getFinalStatus(data.get(3));
 
-        int Q = data.get(0).length();
-        setDataInView(Q, data.get(0), statusFinals.length);
+        int Q = sec.length;
+        setDataInView(Q, data.get(0), statusFinals);
         automata = new Automata(Q, data.get(0), Integer.parseInt(data.get(2)), statusFinals, sec);
 
     }
@@ -136,7 +142,7 @@ public class MainController {
     
     
     
-    public void setDataInView(int Q, String alpha, int F){
+    public void setDataInView(int Q, String alpha, int F[]){
        
         mainView.lblAlphabet.setText("{ "+alpha+" }");
         
@@ -159,13 +165,13 @@ public class MainController {
         mainView.lblStates.setText("{ "+qS+" }");
         
         
-        for (int i = 0; i < F; i++) {
-            if (i < (F-1)) {
+        for (int i = 0; i < F.length; i++) {
+            if (i < (F.length-1)) {
                 
-                fS += "q"+i+", ";
+                fS += "q"+F[i]+", ";
                 
             }else{
-                fS += "q"+i+"";
+                fS += "q"+F[i]+"";
             }
             
         }
