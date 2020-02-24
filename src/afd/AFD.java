@@ -18,7 +18,9 @@ import mdlaf.MaterialLookAndFeel;
  */
 public class AFD {
     
-    
+    /**
+     *
+     */
     public void initMaterialDesign() {
 
         try {
@@ -30,6 +32,9 @@ public class AFD {
 
     }
 
+    /**
+     *
+     */
     public AFD() {
         initMaterialDesign();
         new MainController(new MainView());

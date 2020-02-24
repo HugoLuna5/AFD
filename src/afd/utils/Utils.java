@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.naming.Context;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -79,49 +80,59 @@ public class Utils {
         String resp[] = {};
 
         resp = sec.split(",");
-        int Q = resp.length;
-        int tamAlpha = alpha.length();
+        try {
+            int Q = resp.length;
+            int tamAlpha = alpha.length();
 
-        secuence = new int[Q][tamAlpha];
+            secuence = new int[Q][tamAlpha];
 
-        for (int i = 0; i < Q; i++) {
-            for (int j = 0; j < tamAlpha; j++) {
+            for (int i = 0; i < Q; i++) {
+                for (int j = 0; j < tamAlpha; j++) {
 
-                
-                String respSec[] = {};
-                respSec = resp[i].split(":");
-                 secuence[i][j] = Integer.parseInt(respSec[j]);
-             
-                
+                    String respSec[] = {};
+                    respSec = resp[i].split(":");
+                    secuence[i][j] = Integer.parseInt(respSec[j]);
+
+                }
+
             }
+        } catch (NullPointerException nullPointerException) {
+            System.err.println("Error: " + nullPointerException.getMessage());
+        } catch (NumberFormatException numberFormatException) {
+            System.err.println("Error con el dato ingresado: " + numberFormatException.getMessage());
 
         }
-       
-       
+
         return secuence;
 
     }
 
-    
-    
-    public int[] getFinalStatus(String finalString){
-        int response[] = {};
+    public ArrayList<Integer> getFinalStatus(String finalString, MainView mainView) {
+        ArrayList<Integer> response = new ArrayList<>();
         String dat[] = {};
-        
-        
-        dat = finalString.split(",");
-        
-        response = new int[dat.length];
-        
-        for (int i = 0; i < dat.length; i++) {
-            String string = dat[i];
-            response[i] = Integer.parseInt(dat[i]);
-            
+
+        try {
+            dat = finalString.split(",");
+
+            for (int i = 0; i < dat.length; i++) {
+                String string = dat[i];
+                response.add(Integer.parseInt(dat[i]));
+
+            }
+
+        } catch (NullPointerException nullPointerException) {
+            System.err.println("Error: " + nullPointerException.getMessage());
+
+            JOptionPane.showMessageDialog(mainView, "Alerta", "Sucedio un error, llego un valor nulo", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(mainView, "Alerta", "Sucedio un error, los datos no son validos", JOptionPane.ERROR_MESSAGE);
+
+            System.err.println("Error con el dato ingresado: " + numberFormatException.getMessage());
+
         }
-        
-        
+
         return response;
-      
+
     }
-    
+
 }

@@ -45,10 +45,10 @@ public class MainController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                try{
+                try {
                     openFile();
-                }catch(NullPointerException nullP){
-                    System.err.println("Error: "+nullP.getMessage());
+                } catch (NullPointerException nullP) {
+                    System.err.println("Error: " + nullP.getMessage());
                 }
 
             }
@@ -61,45 +61,16 @@ public class MainController {
             }
         });
 
-        
-
         mainView.btnEvaluate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+
                 readFile();
                 String value = mainView.textWord.getText();
 
                 if (!value.isEmpty() || value.trim().length() > 0) {
-                    
-                    System.out.println("q0: "+automata.getQ0());
-                    System.out.println("alfabeto: "+automata.getAlfabeto());
-                    System.out.println("Secuencia");
-                    
-                    
-                    String contentValue = "";
-                    for (int i = 0; i < automata.getS().length; i++) {
-                        for (int j = 0; j < automata.getS()[0].length; j++) {
-                            
-                            contentValue += "Valor en q"+i+":"+j+" = "+automata.getS(i, j)+"\n";
-                            
-                        }
-                        
-                    }
-                    
-                    System.out.println("Estados finales:");
-                    for (int i = 0; i < automata.getF().length; i++) {
-                        System.out.println(automata.getF(i));
-                        
-                    }
 
-                    if (validateStatus(automata.evaluate(value, automata.getQ0()))) {
-                        
-                        mainView.textResult.setText(contentValue+"\n\nCadena aceptada");
-                        
-                    } else {
-                        mainView.textResult.setText(contentValue+"\n\nCadena rechazada");
-                    }
+                    actionEval(value);
 
                 }
             }
@@ -114,11 +85,11 @@ public class MainController {
     }
 
     public void readFile() {
-        
+
         data = utils.leerArchivo(fileReader);
 
         int sec[][] = utils.convertStringToSec(data.get(0), data.get(1));
-        int statusFinals[] = utils.getFinalStatus(data.get(3));
+        ArrayList<Integer> statusFinals = utils.getFinalStatus(data.get(3), mainView);
 
         int Q = sec.length;
         setDataInView(Q, data.get(0), statusFinals);
@@ -126,60 +97,88 @@ public class MainController {
 
     }
 
-    public boolean validateStatus(int q) {
+    public void actionEval(String value){
+        
+        try{
+            
+            System.out.println("q0: " + automata.getQ0());
+                    System.out.println("alfabeto: " + automata.getAlfabeto());
+                    System.out.println("Secuencia");
 
-        System.out.println("Q final: "+q);
-        int F[] = automata.getF();
-        boolean aux = false;
-        for (int i = 0; i < F.length; i++) {
-            if (F[i] == q) {
-                aux = true;
-            }
+                    String contentValue = "";
+                    for (int i = 0; i < automata.getS().length; i++) {
+                        for (int j = 0; j < automata.getS()[0].length; j++) {
+
+                            contentValue += "Valor en q" + i + ":" + j + " = " + automata.getS(i, j) + "\n";
+
+                        }
+
+                    }
+
+                    System.out.println("Estados finales:");
+                    for (int i = 0; i < automata.getF().size(); i++) {
+                        System.out.println(automata.getF(i));
+
+                    }
+
+                    int responseEv = automata.evaluate(value, automata.getQ0());
+                    if (automata.validateStatus(responseEv)) {
+
+                        mainView.textResult.setText(contentValue + "\n\nq" + responseEv + " ϵ F ∵ es aceptada");
+
+                    } else {
+                        mainView.textResult.setText(contentValue + "\n\nq" + responseEv + " ∉ F ∵ no es aceptada");
+
+                    }
+            
+            
+        }catch(NumberFormatException numberFormatException){
+            System.err.println("Error con los numero ingresados: "+numberFormatException.getMessage());
         }
-
-        return aux;
-
+        
     }
     
-    
-    
-    public void setDataInView(int Q, String alpha, int F[]){
-       
-        mainView.lblAlphabet.setText("{ "+alpha+" }");
-        
-        
+    /**
+     * Colocar los daros en la vista
+     *
+     * @param Q
+     * @param alpha
+     * @param F
+     */
+    public void setDataInView(int Q, String alpha, ArrayList<Integer> F) {
+
+        mainView.lblAlphabet.setText("{ " + alpha + " }");
+
         String qS = "";
         String fS = "";
-        
+
         for (int i = 0; i < Q; i++) {
-            
-            if (i < (Q-1)) {
-                
-                qS += "q"+i+", ";
-                
-            }else{
-                qS += "q"+i+"";
+
+            if (i < (Q - 1)) {
+
+                qS += "q" + i + ", ";
+
+            } else {
+                qS += "q" + i + "";
             }
-            
+
         }
-        
-        mainView.lblStates.setText("{ "+qS+" }");
-        
-        
-        for (int i = 0; i < F.length; i++) {
-            if (i < (F.length-1)) {
-                
-                fS += "q"+F[i]+", ";
-                
-            }else{
-                fS += "q"+F[i]+"";
+
+        mainView.lblStates.setText("{ " + qS + " }");
+
+        for (int i = 0; i < F.size(); i++) {
+            if (i < (F.size() - 1)) {
+
+                fS += "q" + F.get(i) + ", ";
+
+            } else {
+                fS += "q" + F.get(i) + "";
             }
-            
+
         }
-        
-        mainView.lblFinalStates.setText("{"+fS+"}");
-        
-        
+
+        mainView.lblFinalStates.setText("{" + fS + "}");
+
     }
 
 }

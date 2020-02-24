@@ -5,6 +5,8 @@
  */
 package afd.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hugoluna
@@ -14,7 +16,7 @@ public class Automata {
     private int Q;
     private String alfabeto;
     private int q0;
-    private int F[];
+    private ArrayList<Integer> F;
     private int S[][];
     private int symb = -1;
 
@@ -22,7 +24,7 @@ public class Automata {
     public Automata() {
     }
 
-    public Automata(int Q, String alfabeto, int q0, int[] F, int[][] S) {
+    public Automata(int Q, String alfabeto, int q0, ArrayList<Integer> F, int[][] S) {
         this.Q = Q;
         this.alfabeto = alfabeto;
         this.q0 = q0;
@@ -55,15 +57,15 @@ public class Automata {
         this.q0 = q0;
     }
 
-    public int[] getF() {
+    public ArrayList<Integer> getF() {
         return F;
     }
     
     public int getF(int i) {
-        return F[i];
+        return F.get(i);
     }
 
-    public void setF(int[] F) {
+    public void setF(ArrayList<Integer> F) {
         this.F = F;
     }
     
@@ -82,6 +84,13 @@ public class Automata {
     
     
     
+    /**
+     * 
+     * Evaluar/verificar si la cadena "w" es valida
+     * @params w cadena ingresada por el usuario
+     * @params int initValue es el punto incial
+     * 
+     **/
     public int evaluate(String w, int initValue) {
         int q = initValue ;
         char s;
@@ -136,6 +145,21 @@ public class Automata {
     }
     
     
+    
+    public boolean validateStatus(int q) {
+
+        System.out.println("Q final: "+q);
+      
+        boolean aux = false;
+        for (int i = 0; i < F.size(); i++) {
+            if (F.get(i) == q) {
+                aux = true;
+            }
+        }
+
+        return aux;
+
+    }
     
     
 }
