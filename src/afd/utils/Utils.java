@@ -29,10 +29,18 @@ public class Utils {
     private ArrayList<String> data;
     private int secuence[][];
 
+    /**
+     *
+     */
     public Utils() {
         data = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param main
+     * @return
+     */
     public FileReader obtenerRutaArchivo(MainView main) {
 
         try {
@@ -55,6 +63,11 @@ public class Utils {
         return fileReader;
     }
 
+    /**
+     *
+     * @param fr
+     * @return
+     */
     public ArrayList<String> leerArchivo(FileReader fr) {
         BufferedReader br = new BufferedReader(fr);
         String datos = null;
@@ -76,6 +89,12 @@ public class Utils {
 
     }
 
+    /**
+     *
+     * @param alpha
+     * @param sec
+     * @return
+     */
     public int[][] convertStringToSec(String alpha, String sec) {
         String resp[] = {};
 
@@ -107,6 +126,12 @@ public class Utils {
 
     }
 
+    /**
+     *
+     * @param finalString
+     * @param mainView
+     * @return
+     */
     public ArrayList<Integer> getFinalStatus(String finalString, MainView mainView) {
         ArrayList<Integer> response = new ArrayList<>();
         String dat[] = {};

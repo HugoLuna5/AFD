@@ -26,6 +26,11 @@ public class MainController {
     private ArrayList<String> data;
     private Automata automata;
 
+    /**
+     *
+     * @param mainView
+     * 
+     */
     public MainController(MainView mainView) {
         this.mainView = mainView;
 
@@ -34,11 +39,17 @@ public class MainController {
         events();
     }
 
+    /**
+     *
+     */
     public void initVars() {
         utils = new Utils();
 
     }
-
+/**
+ * Metodo publico en el cual se encuentras las acciones de los botones
+ * de la interfaz
+ */
     public void events() {
 
         mainView.optionNewDFA.addActionListener(new ActionListener() {
@@ -78,12 +89,21 @@ public class MainController {
 
     }
 
+    /**
+     * Metodo openFile en el que se abrira el archivo seleccionado
+     * Utilizando fileReader
+     */
     public void openFile() {
         utils = new Utils();
         fileReader = utils.obtenerRutaArchivo(mainView);
         readFile();
     }
 
+    /**
+     * Metodo utilizado para leer el archivo seleccionado y
+     * hacerle una conversion de String a un arreglo para la manipulacion
+     * de los datos dentro del programa
+     */
     public void readFile() {
 
         data = utils.leerArchivo(fileReader);
@@ -97,6 +117,11 @@ public class MainController {
 
     }
 
+    
+    /**
+     * 
+     * @param value 
+     */
     public void actionEval(String value){
         
         try{
