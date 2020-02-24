@@ -28,6 +28,7 @@ public class Automata {
         this.q0 = q0;
         this.F = F;
         this.S = S;
+        
     }
 
     public int getQ() {
@@ -81,10 +82,8 @@ public class Automata {
     
     
     
-    public int evaluate(String w) {
-
-
-        int q = Q ;
+    public int evaluate(String w, int initValue) {
+        int q = initValue ;
         char s;
         int is;
 
@@ -93,8 +92,8 @@ public class Automata {
             s = nextChar(w);
 
             while (true) {
-                is = w.indexOf("" + s);
-
+                is = alfabeto.indexOf(s);
+                
                 if (is == -1) error(102);
 
                 q = S[q][is];

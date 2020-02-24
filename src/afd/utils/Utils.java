@@ -80,6 +80,7 @@ public class Utils {
 
         resp = sec.split(",");
         int Q = resp.length;
+        System.out.println("Convert: "+Q);
         int tamAlpha = alpha.length();
 
         secuence = new int[Q][tamAlpha];

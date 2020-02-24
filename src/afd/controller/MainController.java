@@ -87,13 +87,13 @@ public class MainController {
                         
                     }
                     
-                    System.out.println("Estados finales");
+                    System.out.println("Estados finales:");
                     for (int i = 0; i < automata.getF().length; i++) {
                         System.out.println(automata.getF(i));
                         
                     }
 
-                    if (validateStatus(automata.evaluate(value))) {
+                    if (validateStatus(automata.evaluate(value, automata.getQ0()))) {
                         
                         mainView.textResult.setText(contentValue+"\n\nCadena aceptada");
                         
@@ -128,6 +128,7 @@ public class MainController {
 
     public boolean validateStatus(int q) {
 
+        System.out.println("Q final: "+q);
         int F[] = automata.getF();
         boolean aux = false;
         for (int i = 0; i < F.length; i++) {
