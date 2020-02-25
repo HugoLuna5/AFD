@@ -28,7 +28,7 @@ public class MainController {
 
     /**
      *
-     * @param mainView
+     * @param mainView Se espera la vista a inflar(mostrar)
      * 
      */
     public MainController(MainView mainView) {
@@ -119,8 +119,8 @@ public class MainController {
 
     
     /**
-     * 
-     * @param value 
+     * Evaluacion de la cadena
+     * @param value se recibe el valor del alfabeto
      */
     public void actionEval(String value){
         
@@ -164,11 +164,10 @@ public class MainController {
     }
     
     /**
-     * Colocar los daros en la vista
-     *
-     * @param Q
-     * @param alpha
-     * @param F
+     * Colocar los datos en la vista
+     * @param Q variable donde se almacena el estado
+     * @param alpha varaible donde almacena el rango
+     * @param F variable donde almacena los estados finales
      */
     public void setDataInView(int Q, String alpha, ArrayList<Integer> F) {
 

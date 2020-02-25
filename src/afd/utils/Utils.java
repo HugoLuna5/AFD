@@ -30,16 +30,16 @@ public class Utils {
     private int secuence[][];
 
     /**
-     *
+     * Declaracion del ArrayList
      */
     public Utils() {
         data = new ArrayList<>();
     }
 
     /**
-     *
-     * @param main
-     * @return
+     * Metodo en el cual se seleccionara el archivo por medio del JFileChooser
+     * @param main genera un Jpanel para la lectura de los archivos
+     * @return fileReader
      */
     public FileReader obtenerRutaArchivo(MainView main) {
 
@@ -64,9 +64,9 @@ public class Utils {
     }
 
     /**
-     *
-     * @param fr
-     * @return
+     * Metodo para leer archivo
+     * @param fr variable de tipo FileReader
+     * @return ArrayList con los datos del archivo
      */
     public ArrayList<String> leerArchivo(FileReader fr) {
         BufferedReader br = new BufferedReader(fr);
@@ -90,10 +90,10 @@ public class Utils {
     }
 
     /**
-     *
-     * @param alpha
-     * @param sec
-     * @return
+     * Metodo en el cual se convertiran datos de String a enteros
+     * @param alpha variable que se guardara en la variable con tamAlpha para entrar en el arreglo
+     * @param sec hace la lectura del archivo, al momento de llegar a "," le menciona a la variable su valor
+     * @return devolver arreglo 2d con los datos de la secuencia
      */
     public int[][] convertStringToSec(String alpha, String sec) {
         String resp[] = {};
@@ -127,10 +127,10 @@ public class Utils {
     }
 
     /**
-     *
-     * @param finalString
-     * @param mainView
-     * @return
+     * 
+     * @param finalString Instancias finales generadas en el archivo
+     * @param mainView Llama a la interfaz de usuario
+     * @return regresa el valor de la variable response que se agregan a el ArrayList
      */
     public ArrayList<Integer> getFinalStatus(String finalString, MainView mainView) {
         ArrayList<Integer> response = new ArrayList<>();

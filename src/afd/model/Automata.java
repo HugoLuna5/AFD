@@ -20,19 +20,17 @@ public class Automata {
     private int S[][];
     private int symb = -1;
 
-    /**
-     *
-     */
+    
     public Automata() {
     }
 
     /**
-     *
-     * @param Q
-     * @param alfabeto
-     * @param q0
-     * @param F
-     * @param S
+     * constructor donde se asignan las variables para un nuevo objeto
+     * @param Q establecer los estados
+     * @param alfabeto establecer el alfabeto
+     * @param q0 establecer el estado incial
+     * @param F establecer los estados finales
+     * @param S establcer el valor de la secuencia
      */
     public Automata(int Q, String alfabeto, int q0, ArrayList<Integer> F, int[][] S) {
         this.Q = Q;
@@ -44,99 +42,99 @@ public class Automata {
     }
 
     /**
-     *
-     * @return
+     * salida de la variable Q
+     * @return deveolver el valor de Q
      */
     public int getQ() {
         return Q;
     }
 
     /**
-     *
-     * @param Q
+     * entrada de la variable Q
+     * @param Q establecer el valor de Q
      */
     public void setQ(int Q) {
         this.Q = Q;
     }
 
     /**
-     *
-     * @return
+     * salida de la variable Alfabeto
+     * @return obtener la variable que guarda a el alfabeto
      */
     public String getAlfabeto() {
         return alfabeto;
     }
 
     /**
-     *
-     * @param alfabeto
+     * entrada de la variable Alfabeto
+     * @param alfabeto establecer el valor del alfabeto
      */
     public void setAlfabeto(String alfabeto) {
         this.alfabeto = alfabeto;
     }
 
     /**
-     *
-     * @return
+     * salida de la variable Q0
+     * @return obtener el estado inicial
      */
     public int getQ0() {
         return q0;
     }
 
     /**
-     *
-     * @param q0
+     *  Enttrada de la variable Q0
+     * @param q0 establecer el estado inicial
      */
     public void setQ0(int q0) {
         this.q0 = q0;
     }
 
     /**
-     *
-     * @return
+     * salida de la ArrayList F
+     * @return retornar un ArrayList de los estados finales
      */
     public ArrayList<Integer> getF() {
         return F;
     }
     
     /**
-     *
-     * @param i
-     * @return
+     * salida de la variable F
+     * @param i posicion del estado final
+     * @return devolver el estado final correspondiente a la posicion
      */
     public int getF(int i) {
         return F.get(i);
     }
 
     /**
-     *
-     * @param F
+     *entrada de la variable F
+     * @param F establecer el valor de F
      */
     public void setF(ArrayList<Integer> F) {
         this.F = F;
     }
     
     /**
-     *
-     * @return
+     *salida de la variable S
+     * @return obtener el arreglo Secuencia
      */
     public int[][] getS(){
         return S;
     }
 
     /**
-     *
-     * @param q
-     * @param s
-     * @return
+     *salida de la variable S con la declaracion del tamaño de la matriz
+     * @param q posicion del estado
+     * @param s posicion del simbolo
+     * @return devolver el estado de esa posicion
      */
     public int getS(int q, int s) {
         return S[q][s];
     }
 
     /**
-     *
-     * @param S
+     *entrada de la matriz  S
+     * @param S establecer el arreglo secuencia
      */
     public void setS(int[][] S) {
         this.S = S;
@@ -148,11 +146,9 @@ public class Automata {
     /**
      * 
      * Evaluar/verificar si la cadena "w" es valida
-     * @param w
-     * @param initValue
-     * @return 
-     * @params w cadena ingresada por el usuario
-     * @params int initValue es el punto incial
+     * @param w es la cadena ingresada por el usuario
+     * @param initValue es el estado inicial
+     * @return  retornar el estado final para verificar si es valida
      * 
      **/
     public int evaluate(String w, int initValue) {
@@ -188,10 +184,10 @@ public class Automata {
     }
     
     /**
-     *
-     * @param w
-     * @return
-     * @throws IndexOutOfBoundsException
+     * Metodo que pasa al siguiente caracter de la cadena
+     * @param w cadena introducina por el usuario
+     * @return retornar el el caracter en x posicion
+     * @throws IndexOutOfBoundsException manejador de excepciones
      */
     public char nextChar(String w) throws IndexOutOfBoundsException {
         symb++;
@@ -200,8 +196,8 @@ public class Automata {
     }
     
     /**
-     *
-     * @param i
+     * Metodo Que genera la excepcion de error
+     * @param i posicion/tipo de error para decidir cual se ejecutara
      */
     public void error(int i) {
         switch (i) {
@@ -215,9 +211,9 @@ public class Automata {
     }
     
     /**
-     *
-     * @param q
-     * @return
+     * Metodo donde hace la validacion de los estados
+     * @param q estado final del recorrido
+     * @return retornar su el estado existe en los estados finales
      */
     public boolean validateStatus(int q) {
 

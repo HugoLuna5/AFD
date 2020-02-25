@@ -19,7 +19,7 @@ import mdlaf.MaterialLookAndFeel;
 public class AFD {
     
     /**
-     *
+     * LLamada a la libreria de materialDesign para el uso de esta
      */
     public void initMaterialDesign() {
 
@@ -33,7 +33,7 @@ public class AFD {
     }
 
     /**
-     *
+     * Con la llamada del materialDesign se genera el diseño en la vista principal
      */
     public AFD() {
         initMaterialDesign();
